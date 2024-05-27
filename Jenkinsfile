@@ -14,14 +14,14 @@ pipeline {
 
         stage('Setup') {
             steps {
-                sh 'python3 -m venv $VENV'
-                sh './$VENV/bin/pip install -r requirements.txt'
+                bat 'python -m venv %VENV%'
+                bat '.\\%VENV%\\Scripts\\pip install -r requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                sh './$VENV/bin/python -m unittest discover'
+                bat '.\\%VENV%\\Scripts\\python -m unittest discover'
             }
             post {
                 always {
@@ -32,17 +32,16 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'echo "Building the application..."'
+                bat 'echo Building the application...'
                 // Aquí puedes añadir pasos adicionales de construcción si es necesario
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'echo "Deploying the application..."'
+                bat 'echo Deploying the application...'
                 // Aquí puedes añadir pasos de despliegue si es necesario
             }
         }
     }
 }
-
